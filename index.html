@@ -1,0 +1,1581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FreshCart - eCommerce</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <style>
+    :root {
+      --fc-green: #0aad0a;
+      --fc-green-dark: #089808;
+      --fc-dark: #21313c;
+      --fc-gray: #5c6c75;
+      --fc-light: #f0f3f2;
+      --fc-border: #e3e7e6;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: var(--fc-dark);
+      background-color: #fff;
+    }
+    
+    a {
+      text-decoration: none;
+      color: var(--fc-gray);
+      transition: color 0.2s;
+    }
+    
+    a:hover {
+      color: var(--fc-green);
+    }
+    
+    .btn-fc-primary {
+      background-color: var(--fc-green);
+      border-color: var(--fc-green);
+      color: white;
+    }
+    
+    .btn-fc-primary:hover {
+      background-color: var(--fc-green-dark);
+      border-color: var(--fc-green-dark);
+      color: white;
+    }
+    
+    .btn-fc-outline {
+      background-color: transparent;
+      border-color: var(--fc-green);
+      color: var(--fc-green);
+    }
+    
+    .btn-fc-outline:hover {
+      background-color: var(--fc-green);
+      color: white;
+    }
+    
+    .text-fc-green {
+      color: var(--fc-green) !important;
+    }
+    
+    .bg-fc-green {
+      background-color: var(--fc-green) !important;
+    }
+    
+    .bg-fc-light {
+      background-color: var(--fc-light) !important;
+    }
+    
+    /* Top Bar */
+    .top-bar {
+      background-color: #f0f3f2;
+      padding: 8px 0;
+      font-size: 13px;
+    }
+    
+    .top-bar a {
+      color: gray;
+    }
+    
+    .top-bar a:hover {
+      color: rgb(12, 230, 66);
+    }
+    
+    /* Header */
+    .header-main {
+      padding: 16px 0;
+      border-bottom: 1px solid var(--fc-border);
+    }
+    
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--fc-dark);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .logo i {
+      color: var(--fc-green);
+    }
+    
+    .logo:hover {
+      color: var(--fc-dark);
+    }
+    
+    .search-box {
+      position: relative;
+      flex: 1;
+      max-width: 500px;
+    }
+    
+    .search-box input {
+      width: 100%;
+      padding: 10px 45px 10px 16px;
+      border: 1px solid var(--fc-border);
+      border-radius: 6px;
+      font-size: 14px;
+    }
+    
+    .search-box input:focus {
+      outline: none;
+      border-color: var(--fc-green);
+    }
+    
+    .search-box button {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--fc-gray);
+      cursor: pointer;
+    }
+    
+    .location-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 16px;
+      border: 1px solid var(--fc-border);
+      border-radius: 6px;
+      background: white;
+      font-size: 14px;
+      color: var(--fc-dark);
+      cursor: pointer;
+    }
+    
+    .location-btn:hover {
+      border-color: var(--fc-green);
+    }
+    
+    .header-icon {
+      position: relative;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--fc-dark);
+      font-size: 20px;
+      border-radius: 50%;
+      transition: background-color 0.2s;
+    }
+    
+    .header-icon:hover {
+      background-color: var(--fc-light);
+      color: var(--fc-dark);
+    }
+    
+    .header-icon .badge {
+      position: absolute;
+      top: 0;
+      right: 0;
+      font-size: 10px;
+      padding: 2px 5px;
+    }
+    
+    /* Navigation */
+    .nav-main {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--fc-border);
+    }
+    
+    .btn-departments {
+      background-color: var(--fc-green);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .btn-departments:hover {
+      background-color: var(--fc-green-dark);
+      color: white;
+    }
+    
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin-left: 24px;
+    }
+    
+    .nav-links a {
+      color: var(--fc-dark);
+      font-size: 14px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    
+    .nav-links a:hover {
+      color: var(--fc-green);
+    }
+    
+    /* Hero */
+    .hero-section {
+      background: linear-gradient(135deg, #f8faf9 0%, #f0f5f1 100%);
+      border-radius: 16px;
+      padding: 48px;
+      margin-top: 24px;
+      position: relative;
+      overflow: hidden;
+      min-height: 380px;
+    }
+    
+    .hero-badge {
+      display: inline-block;
+      background-color: #d4edda;
+      color: var(--fc-green);
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    
+    .hero-title {
+      font-size: 42px;
+      font-weight: 700;
+      color: var(--fc-dark);
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    
+    .hero-title span {
+      color: var(--fc-green);
+    }
+    
+    .hero-text {
+      color: var(--fc-gray);
+      font-size: 16px;
+      margin-bottom: 24px;
+      max-width: 400px;
+    }
+    
+    .hero-image {
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 55%;
+      object-fit: cover;
+      border-radius: 0 16px 16px 0;
+    }
+    
+    /* Section Headers */
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+    
+    .section-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--fc-dark);
+      margin: 0;
+    }
+    
+    .section-nav {
+      display: flex;
+      gap: 8px;
+    }
+    
+    .section-nav button {
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--fc-border);
+      border-radius: 50%;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--fc-gray);
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    
+    .section-nav button:hover {
+      border-color: var(--fc-green);
+      color: var(--fc-green);
+    }
+    
+    /* Category Cards */
+    .category-card {
+      border: 1px solid var(--fc-border);
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+      transition: all 0.2s;
+      background: white;
+      height: 100%;
+      cursor: pointer;
+    }
+    
+    .category-card:hover {
+      border-color: var(--fc-green);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+    
+    /* .category-card.active {
+      border-color: var(--fc-green);
+      border-width: 2px;
+    } */
+    
+    .category-card img {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+      margin-bottom: 12px;
+    }
+    
+    .category-card h6 {
+      margin: 0;
+      font-weight: 500;
+      color: var(--fc-dark);
+      font-size: 14px;
+    }
+    
+    /* Promo Cards */
+    .promo-card {
+      border-radius: 16px;
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+      min-height: 200px;
+    }
+    
+    .promo-card.fruits {
+      background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+    }
+    
+    .promo-card.bakery {
+      background: linear-gradient(135deg, #fef5e7 0%, #fdecd0 100%);
+    }
+    
+    .promo-card h3 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--fc-dark);
+      margin-bottom: 8px;
+    }
+    
+    .promo-card p {
+      color: var(--fc-gray);
+      margin-bottom: 16px;
+    }
+    
+    .promo-card img {
+      position: absolute;
+      right: 16px;
+      bottom: 16px;
+      max-width: 45%;
+      max-height: 80%;
+      object-fit: contain;
+    }
+    
+    /* Product Cards */
+    .product-card {
+      border: 1px solid var(--fc-border);
+      border-radius: 12px;
+      padding: 16px;
+      position: relative;
+      transition: all 0.2s;
+      background: white;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .product-card:hover {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    
+    .product-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      color: white;
+      z-index: 2;
+    }
+    
+    .product-badge.sale {
+      background-color: var(--fc-green);
+    }
+    
+    .product-badge.hot {
+      background-color: #dc3545;
+    }
+    
+    .product-badge.discount {
+      background-color: #0dcaf0;
+    }
+    
+    .product-image-wrapper {
+      position: relative;
+      margin-bottom: 12px;
+    }
+    
+    .product-image {
+      width: 100%;
+      height: 140px;
+      object-fit: contain;
+    }
+    
+    .product-category {
+      font-size: 12px;
+      color: var(--fc-gray);
+      margin-bottom: 4px;
+    }
+    
+    .product-title {
+      margin-top: 70px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--fc-dark);
+      margin-bottom: 8px;
+      display: -webkit-box;
+      /* -webkit-line-clamp: 2; */
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      min-height: 40px;
+    }
+    
+    .product-rating {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 12px;
+    }
+    
+    .product-rating .stars {
+      color: #ffc107;
+      font-size: 12px;
+    }
+    
+    .product-rating .count {
+      font-size: 12px;
+      color: var(--fc-gray);
+    }
+    
+    .product-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: auto;
+    }
+    
+    .product-price {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .product-price .current {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--fc-dark);
+    }
+    
+    .product-price .original {
+      font-size: 14px;
+      color: var(--fc-gray);
+      text-decoration: line-through;
+    }
+    
+    .btn-add {
+      padding: 6px 12px;
+      font-size: 13px;
+    }
+    
+    .product-actions {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      opacity: 0;
+      transition: opacity 0.2s;
+      z-index: 3;
+    }
+    
+    .product-card:hover .product-actions {
+      opacity: 1;
+    }
+    
+    .product-actions button {
+      width: 32px;
+      height: 32px;
+      border: 1px solid var(--fc-border);
+      border-radius: 50%;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: var(--fc-gray);
+      cursor: pointer;
+    }
+    
+    .product-actions button:hover {
+      border-color: var(--fc-green);
+      color: var(--fc-green);
+    }
+    
+    /* Custom 5-column grid */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+    }
+    
+    @media (max-width: 1199px) {
+      .product-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+    
+    @media (max-width: 991px) {
+      .product-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    
+    @media (max-width: 767px) {
+      .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    /* Daily Best Sells */
+    .coffee-promo {
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+      border-radius: 16px;
+      padding: 32px;
+      color: white;
+      position: relative;
+      overflow: hidden;
+      height: 100%;
+      min-height: 380px;
+    }
+    
+    .coffee-promo h3 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    
+    .coffee-promo p {
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 24px;
+    }
+    
+    .coffee-promo img {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      max-width: 80%;
+      max-height: 200px;
+      object-fit: contain;
+    }
+    
+    .countdown-card {
+      border: 1px solid var(--fc-border);
+      border-radius: 12px;
+      padding: 16px;
+      background: white;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .countdown-card .product-image {
+      height: 120px;
+    }
+    
+    .countdown {
+      display: flex;
+      gap: 8px;
+      margin-top: auto;
+    }
+    
+    .countdown-item {
+      text-align: center;
+      padding: 8px;
+      border: 1px solid var(--fc-border);
+      border-radius: 6px;
+      min-width: 50px;
+      flex: 1;
+    }
+    
+    .countdown-item .value {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--fc-dark);
+    }
+    
+    .countdown-item .label {
+      font-size: 10px;
+      color: var(--fc-gray);
+      text-transform: capitalize;
+    }
+    
+    /* Features */
+    .feature-card {
+      text-align: center;
+      padding: 24px;
+    }
+    
+    .feature-icon {
+      width: 56px;
+      height: 56px;
+      margin: 0 auto 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      color: var(--fc-green);
+    }
+    
+    .feature-card h5 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--fc-dark);
+      margin-bottom: 8px;
+    }
+    
+    .feature-card p {
+      font-size: 14px;
+      color: var(--fc-gray);
+      margin: 0;
+      line-height: 1.6;
+    }
+    
+    /* Footer */
+    .footer {
+      background-color: var(--fc-light);
+      padding: 48px 0 24px;
+      margin-top: 48px;
+    }
+    
+    .footer h6 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--fc-dark);
+      margin-bottom: 16px;
+    }
+    
+    .footer ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .footer ul li {
+      margin-bottom: 10px;
+    }
+    
+    .footer ul li a {
+      font-size: 14px;
+      color: var(--fc-gray);
+    }
+    
+    .footer ul li a:hover {
+      color: var(--fc-green);
+    }
+    
+    .footer-bottom {
+      border-top: 1px solid var(--fc-border);
+      padding-top: 24px;
+      margin-top: 32px;
+    }
+    
+    .payment-icons {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .payment-icons img {
+      height: 24px;
+    }
+    
+    .app-badges img {
+      height: 40px;
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 12px;
+    }
+    
+    .social-links a {
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--fc-border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--fc-gray);
+      background: white;
+    }
+    
+    .social-links a:hover {
+      border-color: var(--fc-green);
+      color: var(--fc-green);
+    }
+    
+    /* Responsive */
+    @media (max-width: 991px) {
+      .hero-image {
+        display: none;
+      }
+      
+      .hero-section {
+        text-align: center;
+      }
+      
+      .hero-text {
+        max-width: none;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      
+      .nav-links {
+        display: none;
+      }
+      
+      .hero-title {
+        font-size: 32px;
+      }
+    }
+    
+    @media (max-width: 767px) {
+      .header-main .d-flex {
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      
+      .search-box {
+        order: 3;
+        max-width: none;
+        width: 100%;
+      }
+      
+      .hero-title {
+        font-size: 28px;
+      }
+      
+      .hero-section {
+        padding: 32px 24px;
+      }
+      
+      .section-title {
+        font-size: 20px;
+      }
+      
+      .promo-card {
+        min-height: 160px;
+        padding: 24px;
+      }
+      
+      .promo-card h3 {
+        font-size: 20px;
+      }
+      
+      .promo-card img {
+        max-width: 40%;
+      }
+      
+      .footer-bottom .row {
+        text-align: center;
+      }
+      
+      .footer-bottom .d-flex {
+        justify-content: center !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Bar -->
+  <div class="top-bar text-gray">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center">
+        <span>Super Value Deals - Save more with coupons</span>
+        <div class="d-flex align-items-center gap-3">
+          <a href="#" class="d-flex align-items-center gap-2">
+            <img src="https://flagcdn.com/w20/gb.png" alt="EN" style="height: 14px;"> English
+            <i class="bi bi-chevron-down" style="font-size: 10px;"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Top Bar End -->
+
+  <!-- Header Main -->
+  <header class="header-main">
+    <div class="container">
+      <div class="d-flex align-items-center gap-4">
+        <a href="#" class="logo">
+          <i class="bi bi-cart3"></i> FreshCart
+        </a>
+        
+        <div class="search-box">
+          <input type="text" placeholder="Search for products">
+          <button type="button"><i class="bi bi-search"></i></button>
+        </div>
+        
+        <button class="location-btn d-none d-md-flex">
+          <i class="bi bi-geo-alt"></i> Location
+        </button>
+        
+        <div class="d-flex align-items-center gap-2">
+          <a href="#" class="header-icon">
+            <i class="bi bi-heart"></i>
+            <span class="badge rounded-pill bg-fc-green">5</span>
+          </a>
+          <a href="#" class="header-icon">
+            <i class="bi bi-person"></i>
+          </a>
+          <a href="#" class="header-icon">
+            <i class="bi bi-cart3"></i>
+            <span class="badge rounded-pill bg-fc-green">1</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+   <!-- Header Main End -->
+
+  <!-- Navigation -->
+  <nav class="nav-main">
+    <div class="container">
+      <div class="d-flex align-items-center">
+        <button class="btn-departments">
+          <i class="bi bi-grid-3x3-gap"></i> All Departments
+        </button>
+        
+        <div class="nav-links">
+          <a href="#">Home <i class="bi bi-chevron-down"></i></a>
+          <a href="#">Shop <i class="bi bi-chevron-down"></i></a>
+          <a href="#">Stores <i class="bi bi-chevron-down"></i></a>
+          <a href="#">Mega menu <i class="bi bi-chevron-down"></i></a>
+          <a href="#">Pages <i class="bi bi-chevron-down"></i></a>
+          <a href="#">Account <i class="bi bi-chevron-down"></i></a>
+          <a href="#">Dashboard</a>
+          <a href="#">Docs</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+   <!-- Navigation End -->
+
+  <!-- Main Content -->
+  <main class="container">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="row">
+        <div class="col-lg-6">
+          <span class="hero-badge">Free Shipping - orders over $100</span>
+          <h1 class="hero-title">Free Shipping on<br>orders over <span>$100</span></h1>
+          <p class="hero-text">Free Shipping to First-Time Customers Only, After promotions and discounts are applied.</p>
+          <a href="#" class="btn btn-fc-primary btn-lg">
+            Shop Now <i class="bi bi-arrow-right ms-2"></i>
+          </a>
+        </div>
+      </div>
+      <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?w=800&h=600&fit=crop" alt="Fresh Vegetables" class="hero-image d-none d-lg-block">
+    </section>
+      <!-- Main Content Ens -->
+
+    <!-- Featured Categories -->
+    <section class="py-5">
+      <div class="section-header">
+        <h2 class="section-title">Featured Categories</h2>
+        <div class="section-nav">
+          <button type="button"><i class="bi bi-chevron-left"></i></button>
+          <button type="button"><i class="bi bi-chevron-right"></i></button>
+        </div>
+      </div>
+      
+      <div class="row g-3">
+        <div class="col-6 col-md-4 col-lg-3">
+          <div class="category-card">
+            <img src="https://images.unsplash.com/photo-1563636619-e9143da7973b?w=200&h=200&fit=crop" alt="Dairy">
+            <h6>Dairy, Bread & Eggs</h6>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3">
+          <div class="category-card active">
+            <img src="https://images.unsplash.com/photo-1621939514649-280e2ee25f60?w=200&h=200&fit=crop" alt="Snacks">
+            <h6>Snack & Munchies</h6>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3">
+          <div class="category-card">
+            <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=200&h=200&fit=crop" alt="Bakery">
+            <h6>Bakery & Biscuits</h6>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3">
+          <div class="category-card">
+            <img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=200&h=200&fit=crop" alt="Tea Coffee">
+            <h6>Tea, Coffee & Drinks</h6>
+          </div>
+        </div>
+        <!-- <div class="col-6 col-md-4 col-lg-3 d-none d-lg-block">
+          <div class="category-card">
+            <img src="https://images.unsplash.com/photo-1584839404042-8bc82c4e1d4d?w=200&h=200&fit=crop" alt="Baby Care">
+            <h6>Baby Care</h6>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3 d-none d-lg-block">
+          <div class="category-card">
+            <img src="https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=200&h=200&fit=crop" alt="Chicken Meat">
+            <h6>Chicken, Meat & Fish</h6>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3 d-none d-lg-block">
+          <div class="category-card">
+            <img src="https://images.unsplash.com/photo-1586201375761-83865001e8ac?w=200&h=200&fit=crop" alt="Atta Rice">
+            <h6>Atta, Rice & Dal</h6>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3 d-none d-lg-block">
+          <div class="category-card">
+            <img src="https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=200&h=200&fit=crop" alt="Pet Care">
+            <h6>Pet Care</h6>
+          </div>
+        </div> -->
+      </div>
+    </section>
+        <!-- Featured Categories End -->
+
+
+    <!-- Promo Banners -->
+    <section class="row g-4 mb-5">
+      <div class="col-md-6">
+        <div class="promo-card fruits">
+          <h3>Fruits & Vegetables</h3>
+          <p>Get Upto 30% Off</p>
+          <a href="#" class="btn btn-fc-primary">Shop Now</a>
+          <img src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=300&h=200&fit=crop" alt="Fruits">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="promo-card bakery">
+          <h3>Freshly Baked Buns</h3>
+          <p>Get Upto 25% Off</p>
+          <a href="#" class="btn btn-fc-primary">Shop Now</a>
+          <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=300&h=200&fit=crop" alt="Bakery">
+        </div>
+      </div>
+    </section>
+        <!-- Promo Banners End -->
+
+
+    <!-- Popular Products -->
+    <section class="mb-5">
+      <div class="section-header">
+        <h2 class="section-title">Popular Products</h2>
+      </div>
+          <!-- Popular Products End -->
+
+      
+      <div class="product-grid">
+        <!-- Product 1 -->
+        <div class="product-card">
+          <span class="product-badge sale">Sale</span>
+          <div class="product-actions">
+            <button type="button" title="Quick view"><i class="bi bi-eye"></i></button>
+            <button type="button" title="Add to wishlist"><i class="bi bi-heart"></i></button>
+            <button type="button" title="Compare"><i class="bi bi-arrow-left-right"></i></button>
+          </div>
+          <div class="product-image-wrapper">
+            <img src="https://images.unsplash.com/photo-1599490659213-e2b9527bd087?w=200&h=200&fit=crop" alt="Haldiram's Sev Bhujia" class="product-image">
+          </div>
+          <div class="product-category">Snack & Munchies</div>
+          <h6 class="product-title">Haldiram's Sev Bhujia</h6>
+          <div class="product-rating">
+            <span class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i></span>
+            <span class="count">4.5 (149)</span>
+          </div>
+          <div class="product-footer">
+            <div class="product-price">
+              <span class="current">$18</span>
+              <span class="original">$24</span>
+            </div>
+            <button class="btn btn-fc-primary btn-add"><i class="bi bi-plus"></i> Add</button>
+          </div>
+        </div>
+                <!-- Product 1 End -->
+
+        <!-- Product 2 -->
+        <div class="product-card">
+          <span class="product-badge discount">14%</span>
+          <div class="product-actions">
+            <button type="button" title="Quick view"><i class="bi bi-eye"></i></button>
+            <button type="button" title="Add to wishlist"><i class="bi bi-heart"></i></button>
+            <button type="button" title="Compare"><i class="bi bi-arrow-left-right"></i></button>
+          </div>
+          <div class="product-image-wrapper">
+            <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=200&h=200&fit=crop" alt="NutriChoice Digestive" class="product-image">
+          </div>
+          <div class="product-category">Bakery & Biscuits</div>
+          <h6 class="product-title">NutriChoice Digestive</h6>
+          <div class="product-rating">
+            <span class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i></span>
+            <span class="count">4.5 (25)</span>
+          </div>
+          <div class="product-footer">
+            <div class="product-price">
+              <span class="current">$24</span>
+            </div>
+            <button class="btn btn-fc-primary btn-add"><i class="bi bi-plus"></i> Add</button>
+          </div>
+        </div>
+                <!-- Product 2 End -->
+
+        
+        <!-- Product 3 -->
+        <div class="product-card">
+          <div class="product-actions">
+            <button type="button" title="Quick view"><i class="bi bi-eye"></i></button>
+            <button type="button" title="Add to wishlist"><i class="bi bi-heart"></i></button>
+            <button type="button" title="Compare"><i class="bi bi-arrow-left-right"></i></button>
+          </div>
+          <div class="product-image-wrapper">
+            <img src="https://images.unsplash.com/photo-1606312619070-d48b4c652a52?w=200&h=200&fit=crop" alt="Cadbury 5 Star Chocolate" class="product-image">
+          </div>
+          <div class="product-category">Bakery & Biscuits</div>
+          <h6 class="product-title">Cadbury 5 Star Chocolate</h6>
+          <div class="product-rating">
+            <span class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></span>
+            <span class="count">5 (469)</span>
+          </div>
+          <div class="product-footer">
+            <div class="product-price">
+              <span class="current">$32</span>
+              <span class="original">$35</span>
+            </div>
+            <button class="btn btn-fc-primary btn-add"><i class="bi bi-plus"></i> Add</button>
+          </div>
+        </div>
+                <!-- Product 3 End -->
+
+        
+        <!-- Product 4 -->
+        <div class="product-card">
+          <span class="product-badge hot">Hot</span>
+          <div class="product-actions">
+            <button type="button" title="Quick view"><i class="bi bi-eye"></i></button>
+            <button type="button" title="Add to wishlist"><i class="bi bi-heart"></i></button>
+            <button type="button" title="Compare"><i class="bi bi-arrow-left-right"></i></button>
+          </div>
+          <div class="product-image-wrapper">
+            <img src="https://images.unsplash.com/photo-1566478989037-eec170784d0b?w=200&h=200&fit=crop" alt="Onion Flavour Potato" class="product-image">
+          </div>
+          <div class="product-category">Snack & Munchies</div>
+          <h6 class="product-title">Onion Flavour Potato</h6>
+          <div class="product-rating">
+            <span class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i><i class="bi bi-star"></i></span>
+            <span class="count">3.5 (456)</span>
+          </div>
+          <div class="product-footer">
+            <div class="product-price">
+              <span class="current">$3</span>
+              <span class="original">$5</span>
+            </div>
+            <button class="btn btn-fc-primary btn-add"><i class="bi bi-plus"></i> Add</button>
+          </div>
+        </div>
+                <!-- Product 4 End -->
+
+        
+        <!-- Product 5 -->
+        <div class="product-card">
+          <div class="product-actions">
+            <button type="button" title="Quick view"><i class="bi bi-eye"></i></button>
+            <button type="button" title="Add to wishlist"><i class="bi bi-heart"></i></button>
+            <button type="button" title="Compare"><i class="bi bi-arrow-left-right"></i></button>
+          </div>
+          <div class="product-image-wrapper">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQIqEe1Y5VmaD2RFKpUMf3eKVoYRctktS95A&s" alt="Salted Instant Popcorn" class="product-image">
+          </div>
+          <div class="product-category">Instant Food</div>
+          <h6 class="product-title">Salted Instant Popcorn</h6>
+          <div class="product-rating">
+            <span class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i></span>
+            <span class="count">4.5 (39)</span>
+          </div>
+          <div class="product-footer">
+            <div class="product-price">
+              <span class="current">$13</span>
+              <span class="original">$18</span>
+            </div>
+            <button class="btn btn-fc-primary btn-add"><i class="bi bi-plus"></i> Add</button>
+          </div>
+        </div>
+                <!-- Product 5 End -->
+
+        
+        <!-- Product 6 -->
+        <div class="product-card">
+          <span class="product-badge sale">Sale</span>
+          <div class="product-actions">
+            <button type="button" title="Quick view"><i class="bi bi-eye"></i></button>
+            <button type="button" title="Add to wishlist"><i class="bi bi-heart"></i></button>
+            <button type="button" title="Compare"><i class="bi bi-arrow-left-right"></i></button>
+          </div>
+          <div class="product-image-wrapper">
+            <img src="https://images.unsplash.com/photo-1550583724-b2692b85b150?w=200&h=200&fit=crop" alt="Blueberry Greek Yogurt" class="product-image">
+          </div>
+          <div class="product-category">Dairy, Bread & Eggs</div>
+          <h6 class="product-title">Blueberry Greek Yogurt</h6>
+          <div class="product-rating">
+            <span class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i></span>
+            <span class="count">4.5 (189)</span>
+          </div>
+          <div class="product-footer">
+            <div class="product-price">
+              <span class="current">$18</span>
+              <span class="original">$24</span>
+            </div>
+            <button class="btn btn-fc-primary btn-add"><i class="bi bi-plus"></i> Add</button>
+          </div>
+        </div>
+                <!-- Product 6 End -->
+
+        
+        <!-- Product 7 -->
+        <div class="product-card">
+          <div class="product-actions">
+            <button type="button" title="Quick view"><i class="bi bi-eye"></i></button>
+            <button type="button" title="Add to wishlist"><i class="bi bi-heart"></i></button>
+            <button type="button" title="Compare"><i class="bi bi-arrow-left-right"></i></button>
+          </div>
+          <div class="product-image-wrapper">
+            <img src="https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?w=200&h=200&fit=crop" alt="Britannia Cheese Slices" class="product-image">
+          </div>
+          <div class="product-category">Dairy, Bread & Eggs</div>
+          <h6 class="product-title">Britannia Cheese Slices</h6>
+          <div class="product-rating">
+            <span class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></span>
+            <span class="count">5 (345)</span>
+          </div>
+          <div class="product-footer">
+            <div class="product-price">
+              <span class="current">$24</span>
+            </div>
+            <button class="btn btn-fc-primary btn-add"><i class="bi bi-plus"></i> Add</button>
+          </div>
+        </div>
+                <!-- Product 7 End -->
+
+        <!-- Product 8 -->
+        <div class="product-card">
+          <div class="product-actions">
+            <button type="button" title="Quick view"><i class="bi bi-eye"></i></button>
+            <button type="button" title="Add to wishlist"><i class="bi bi-heart"></i></button>
+            <button type="button" title="Compare"><i class="bi bi-arrow-left-right"></i></button>
+          </div>
+          <div class="product-image-wrapper">
+            <img src="https://images.unsplash.com/photo-1523473827533-2a64d0d36748?w=200&h=200&fit=crop" alt="Kellogg's Original Cereals" class="product-image">
+          </div>
+          <div class="product-category">Instant Food</div>
+          <h6 class="product-title">Kellogg's Original Cereals</h6>
+          <div class="product-rating">
+            <span class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i></span>
+            <span class="count">4 (90)</span>
+          </div>
+          <div class="product-footer">
+            <div class="product-price">
+              <span class="current">$32</span>
+              <span class="original">$35</span>
+            </div>
+            <button class="btn btn-fc-primary btn-add"><i class="bi bi-plus"></i> Add</button>
+          </div>
+        </div>
+                <!-- Product 8 End -->
+
+        
+        <!-- Product 9 -->
+        <div class="product-card">
+          <div class="product-actions">
+            <button type="button" title="Quick view"><i class="bi bi-eye"></i></button>
+            <button type="button" title="Add to wishlist"><i class="bi bi-heart"></i></button>
+            <button type="button" title="Compare"><i class="bi bi-arrow-left-right"></i></button>
+          </div>
+          <div class="product-image-wrapper">
+            <img src="https://images.unsplash.com/photo-1610450949065-1f2841536c88?w=200&h=200&fit=crop" alt="Slurrp Millet Chocolate" class="product-image">
+          </div>
+          <div class="product-category">Snack & Munchies</div>
+          <h6 class="product-title">Slurrp Millet Chocolate</h6>
+          <div class="product-rating">
+            <span class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i></span>
+            <span class="count">4.5 (67)</span>
+          </div>
+          <div class="product-footer">
+            <div class="product-price">
+              <span class="current">$3</span>
+              <span class="original">$5</span>
+            </div>
+            <button class="btn btn-fc-primary btn-add"><i class="bi bi-plus"></i> Add</button>
+          </div>
+        </div>
+                <!-- Product 9 -->
+
+        
+        <!-- Product 10 -->
+        <div class="product-card">
+          <div class="product-actions">
+            <button type="button" title="Quick view"><i class="bi bi-eye"></i></button>
+            <button type="button" title="Add to wishlist"><i class="bi bi-heart"></i></button>
+            <button type="button" title="Compare"><i class="bi bi-arrow-left-right"></i></button>
+          </div>
+          <div class="product-image-wrapper">
+            <img src="https://images.unsplash.com/photo-1589985270826-4b7bb135bc9d?w=200&h=200&fit=crop" alt="Amul Butter" class="product-image">
+          </div>
+          <div class="product-category">Dairy, Bread & Eggs</div>
+          <h6 class="product-title">Amul Butter - 500 g</h6>
+          <div class="product-rating">
+            <span class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i><i class="bi bi-star"></i></span>
+            <span class="count">3.5 (89)</span>
+          </div>
+          <div class="product-footer">
+            <div class="product-price">
+              <span class="current">$13</span>
+              <span class="original">$18</span>
+            </div>
+            <button class="btn btn-fc-primary btn-add"><i class="bi bi-plus"></i> Add</button>
+          </div>
+        </div>
+      </div>
+    </section>
+        <!-- Popular Products End -->
+
+    <!-- Daily Best Sells -->
+    <section class="mb-5">
+      <div class="section-header">
+        <h2 class="section-title">Daily Best Sells</h2>
+        <div class="section-nav d-none d-md-flex">
+          <button type="button"><i class="bi bi-chevron-left"></i></button>
+          <button type="button"><i class="bi bi-chevron-right"></i></button>
+        </div>
+      </div>
+      
+      <div class="row g-4">
+        <div class="col-lg-3 col-md-6">
+          <div class="coffee-promo">
+            <h3>100% Organic<br>Coffee Beans.</h3>
+            <p>Get the best deal before close.</p>
+            <a href="#" class="btn btn-fc-primary">
+              Shop Now <i class="bi bi-arrow-right ms-2"></i>
+            </a>
+            <!-- <img src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=300&h=300&fit=crop" alt="Coffee " > -->
+          </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-6">
+          <div class="countdown-card">
+            <img src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=200&h=150&fit=crop" alt="Coffee" class="product-image">
+            <h6 class="product-title">Roast Ground Coffee</h6>
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <div class="product-price">
+                <span class="current">$13</span>
+                <span class="original">$18</span>
+              </div>
+              <div class="product-rating">
+                <span class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i></span>
+                <span class="count">4.5</span>
+              </div>
+            </div>
+            <button class="btn btn-fc-primary w-100 mb-3"><i class="bi bi-plus"></i> Add to cart</button>
+            <div class="countdown">
+              <div class="countdown-item">
+                <div class="value">981</div>
+                <div class="label">Days</div>
+              </div>
+              <div class="countdown-item">
+                <div class="value">21</div>
+                <div class="label">Hours</div>
+              </div>
+              <div class="countdown-item">
+                <div class="value">8</div>
+                <div class="label">Mins</div>
+              </div>
+              <div class="countdown-item">
+                <div class="value">58</div>
+                <div class="label">Sec</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-6">
+          <div class="countdown-card">
+            <img src="https://images.unsplash.com/photo-1546548970-71785318a17b?w=200&h=150&fit=crop" alt="Tomatoes" class="product-image">
+            <h6 class="product-title">Crushed Tomatoes</h6>
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <div class="product-price">
+                <span class="current">$13</span>
+                <span class="original">$18</span>
+              </div>
+              <div class="product-rating">
+                <span class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i></span>
+                <span class="count">4.5</span>
+              </div>
+            </div>
+            <button class="btn btn-fc-primary w-100 mb-3"><i class="bi bi-plus"></i> Add to cart</button>
+            <div class="countdown">
+              <div class="countdown-item">
+                <div class="value">1041</div>
+                <div class="label">Days</div>
+              </div>
+              <div class="countdown-item">
+                <div class="value">22</div>
+                <div class="label">Hours</div>
+              </div>
+              <div class="countdown-item">
+                <div class="value">8</div>
+                <div class="label">Mins</div>
+              </div>
+              <div class="countdown-item">
+                <div class="value">58</div>
+                <div class="label">Sec</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-6">
+          <div class="countdown-card">
+            <img src="https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=200&h=150&fit=crop" alt="Pineapple" class="product-image">
+            <h6 class="product-title">Golden Pineapple</h6>
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <div class="product-price">
+                <span class="current">$13</span>
+                <span class="original">$18</span>
+              </div>
+              <div class="product-rating">
+                <span class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i></span>
+                <span class="count">4.5</span>
+              </div>
+            </div>
+            <button class="btn btn-fc-primary w-100 mb-3"><i class="bi bi-plus"></i> Add to cart</button>
+            <div class="countdown">
+              <div class="countdown-item">
+                <div class="value">1013</div>
+                <div class="label">Days</div>
+              </div>
+              <div class="countdown-item">
+                <div class="value">22</div>
+                <div class="label">Hours</div>
+              </div>
+              <div class="countdown-item">
+                <div class="value">8</div>
+                <div class="label">Mins</div>
+              </div>
+              <div class="countdown-item">
+                <div class="value">58</div>
+                <div class="label">Sec</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+        <!-- Daily Best Sells End -->
+
+
+    <!-- Features -->
+    <section class="row g-4 mb-5 py-4 border-top border-bottom">
+      <div class="col-md-6 col-lg-3">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="bi bi-clock"></i>
+          </div>
+          <h5>10 minute grocery now</h5>
+          <p>Get your order delivered to your doorstep at the earliest from FreshCart pickup stores near you.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="bi bi-gift"></i>
+          </div>
+          <h5>Best Prices & Offers</h5>
+          <p>Cheaper prices than your local supermarket, great cashback offers to top it off. Get best prices & offers.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="bi bi-box-seam"></i>
+          </div>
+          <h5>Wide Assortment</h5>
+          <p>Choose from 5000+ products across food, personal care, household, bakery, veg and non-veg & other categories.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="bi bi-arrow-repeat"></i>
+          </div>
+          <h5>Easy Returns</h5>
+          <p>Not satisfied with a product? Return it at the doorstep & get a refund within hours. No questions asked <a href="#" class="text-fc-green">policy</a>.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+      <!-- Features End -->
+
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-6 col-md-4 col-lg-2">
+          <h6>Categories</h6>
+          <ul>
+            <li><a href="#">Vegetables & Fruits</a></li>
+            <li><a href="#">Breakfast & instant food</a></li>
+            <li><a href="#">Bakery & Biscuits</a></li>
+            <li><a href="#">Atta, rice & dal</a></li>
+            <li><a href="#">Sauces & spreads</a></li>
+            <li><a href="#">Organic & gourmet</a></li>
+            <li><a href="#">Baby care</a></li>
+            <li><a href="#">Cleaning essentials</a></li>
+            <li><a href="#">Personal care</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2">
+          <h6 class="invisible">Categories</h6>
+          <ul>
+            <li><a href="#">Dairy, bread & eggs</a></li>
+            <li><a href="#">Cold drinks & juices</a></li>
+            <li><a href="#">Tea, coffee & drinks</a></li>
+            <li><a href="#">Masala, oil & more</a></li>
+            <li><a href="#">Chicken, meat & fish</a></li>
+            <li><a href="#">Paan corner</a></li>
+            <li><a href="#">Pharma & wellness</a></li>
+            <li><a href="#">Home & office</a></li>
+            <li><a href="#">Pet care</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2">
+          <h6>Get to know us</h6>
+          <ul>
+            <li><a href="#">Company</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Our Value</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2">
+          <h6>For Consumers</h6>
+          <ul>
+            <li><a href="#">Payments</a></li>
+            <li><a href="#">Shipping</a></li>
+            <li><a href="#">Product Returns</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Shop Checkout</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2">
+          <h6>Become a Shopper</h6>
+          <ul>
+            <li><a href="#">Shopper Opportunities</a></li>
+            <li><a href="#">Become a Shopper</a></li>
+            <li><a href="#">Earnings</a></li>
+            <li><a href="#">Ideas & Guides</a></li>
+            <li><a href="#">New Retailers</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2">
+          <h6>Freshcart programs</h6>
+          <ul>
+            <li><a href="#">Freshcart programs</a></li>
+            <li><a href="#">Gift Cards</a></li>
+            <li><a href="#">Promos & Coupons</a></li>
+            <li><a href="#">Freshcart Ads</a></li>
+            <li><a href="#">Careers</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <div class="row align-items-center g-4">
+          <div class="col-lg-4">
+            <div class="d-flex flex-wrap align-items-center gap-3">
+              <span class="text-muted small">Payment Partners</span>
+              <div class="payment-icons">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Paypal_2014_logo.png/200px-Paypal_2014_logo.png" alt="PayPal" style="height: 20px;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/200px-Visa_Inc._logo.svg.png" alt="Visa" style="height: 16px;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/200px-Mastercard-logo.svg.png" alt="Mastercard" style="height: 24px;">
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 text-lg-center">
+            <div class="d-flex flex-wrap align-items-center justify-content-lg-center gap-3">
+              <span class="text-muted small">Get deliveries with FreshCart</span>
+              <div class="app-badges d-flex gap-2">
+                <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Download_on_the_App_Store_Badge.svg/200px-Download_on_the_App_Store_Badge.svg.png" alt="App Store" style="height: 36px;"></a>
+                <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/200px-Google_Play_Store_badge_EN.svg.png" alt="Google Play" style="height: 36px;"></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="d-flex flex-wrap align-items-center justify-content-lg-end gap-3">
+              <span class="text-muted small">Follow us on</span>
+              <div class="social-links">
+                <a href="#" title="Facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" title="Twitter"><i class="bi bi-twitter"></i></a>
+                <a href="#" title="Instagram"><i class="bi bi-instagram"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="text-center mt-4">
+          <p class="text-muted small mb-0">&copy; 2022 - 2026 FreshCart eCommerce HTML Template. All rights reserved. Powered by <a href="#" class="text-fc-green">Codescandy</a>.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+    <!-- Footer End -->
+
+
+</body>
+</html>
